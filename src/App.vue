@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import {useUsers} from "@/composables/useUsers.ts";
-import {onMounted} from "vue";
+import UserList from "@/components/UserList.vue";
 
-const { users, loading, error, fetchUsers, deleteUser } = useUsers();
-onMounted(fetchUsers);
 </script>
 
 <template>
@@ -12,9 +9,7 @@ onMounted(fetchUsers);
     <div class="header">
      <h1>User Management Dashboard</h1>
     </div>
-    <div v-for="user in users">
-     {{ user.name }}
-    </div>
+    <UserList/>
     <div class="footer">
      <span>Demo with mock data & delays</span>
      <span>Vue 3 • Composition API • TypeScript</span>
