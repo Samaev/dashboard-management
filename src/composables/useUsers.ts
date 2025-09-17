@@ -2,10 +2,7 @@ import { ref, readonly } from 'vue'
 import type {User} from "@/types/user.ts";
 import {mockUsers} from "@/data/users.ts";
 
-
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms))
-
-
 
 export function useUsers() {
     const users = ref<User[]>([])
