@@ -42,3 +42,11 @@ body {
     font-size: 18px;
     font-weight: 700;
 }
+.footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
