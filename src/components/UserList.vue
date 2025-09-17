@@ -32,10 +32,10 @@
    <table class="table" v-if="filteredUsers.length > 0">
     <thead>
     <tr>
-     <th style="min-width: 220px;">Name</th>
-     <th style="min-width: 260px;">Email</th>
+     <th class="table-th-name">Name</th>
+     <th class="table-th-email">Email</th>
      <th>Status</th>
-     <th style="text-align: right; min-width: 120px;">Actions</th>
+     <th class="table-th-actions">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -45,7 +45,7 @@
      <td>
       <StatusBadge :status="u.status" />
      </td>
-     <td style="text-align: right;">
+     <td class="table-td">
       <button
         class="btn btn--danger"
         @click="onDelete(u.id, u.name)"
@@ -95,9 +95,9 @@ async function onDelete(id: number, name: string) {
 
  const success = await deleteUser(id)
  if (success) {
-  pushToast(`User "${name}" deleted`, 'success', 2200)
+  pushToast(`User "${name}" deleted`, 'success', 3200)
  } else {
-  pushToast(`Failed to delete "${name}"`, 'error', 2800)
+  pushToast(`Failed to delete "${name}"`, 'error', 3800)
  }
 }
 

@@ -9,7 +9,7 @@ const state = reactive<{ toasts: ToastItem[] }>({
 let seed = 1
 
 export function useToast() {
-    function push(message: string, variant: ToastVariant = 'info', duration = 4500) {
+    function push(message: string, variant: ToastVariant = 'info', duration = 2500) {
         const id = seed++
         state.toasts.push({ id, message, variant })
         window.setTimeout(() => dismiss(id), duration)
