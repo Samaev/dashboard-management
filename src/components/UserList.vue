@@ -1,6 +1,34 @@
 <template>
  <section>
-  <div class="table-wrap" >
+  <div class="filters">
+   <input
+     v-model.trim="search"
+     class="input"
+     type="search"
+     placeholder="Search by name or email..."
+     aria-label="Search users"
+   />
+
+   <select
+     v-model="status"
+     class="select"
+     aria-label="Filter by status"
+   >
+    <option value="all">All statuses</option>
+    <option value="active">Active</option>
+    <option value="inactive">Inactive</option>
+   </select>
+  </div>
+
+  <div class="table-wrap" v-if="loading">
+   <div class="loading">Loading…</div>
+  </div>
+
+  <div class="table-wrap" v-else-if="error">
+   <div class="error">{{ error }}</div>
+  </div>
+
+  <div class="table-wrap" v-else>
    <table class="table" v-if="filteredUsers.length > 0">
     <thead>
     <tr>
@@ -18,7 +46,13 @@
       <StatusBadge :status="u.status" />
      </td>
      <td style="text-align: right;">
+      <button
+        class="btn btn--danger"
+        @click="onDelete(u.id, u.name)"
+        aria-label="Delete user"
+      >
        Delete
+      </button>
      </td>
     </tr>
     </tbody>
@@ -31,10 +65,13 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import StatusBadge from './StatusBadge.vue'
 import { useUsers, type User } from '../composables/useUsers'
-import type { StatusFilter } from '../types/status-filter.ts'
+import { useToast } from '../composables/useToast'
+import type {StatusFilter} from "@/types/status-filter.ts";
 
 const { users, loading, error, fetchUsers, deleteUser } = useUsers()
+const { push: pushToast } = useToast()
 
 const search = ref<string>('')
 const status = ref<StatusFilter>('all')
@@ -49,10 +86,21 @@ const filteredUsers = computed<User[]>(() => {
  const byStatus = (u: User) =>
    status.value === 'all' ? true : u.status === status.value
 
+ // Keep stable order; filter in one pass
  return users.value.filter(u => bySearch(u) && byStatus(u))
 })
 
+async function onDelete(id: number, name: string) {
+ const ok = window.confirm(`Delete user "${name}"?`)
+ if (!ok) return
 
+ const success = await deleteUser(id)
+ if (success) {
+  pushToast(`User "${name}" deleted`, 'success', 2200)
+ } else {
+  pushToast(`Failed to delete "${name}"`, 'error', 2800)
+ }
+}
 
 onMounted(fetchUsers)
 </script>
