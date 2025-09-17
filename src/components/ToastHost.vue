@@ -13,5 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import {useToast} from "@/composables/useToast.ts";
+
 const { toasts } = useToast()
 </script>

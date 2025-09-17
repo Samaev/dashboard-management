@@ -2,8 +2,6 @@ import { reactive } from 'vue'
 import type {ToastVariant} from "@/types/toast-variant.ts";
 import type {ToastItem} from "@/types/toast-item.ts";
 
-
-
 const state = reactive<{ toasts: ToastItem[] }>({
     toasts: []
 })
@@ -11,7 +9,7 @@ const state = reactive<{ toasts: ToastItem[] }>({
 let seed = 1
 
 export function useToast() {
-    function push(message: string, variant: ToastVariant = 'info', duration = 2500) {
+    function push(message: string, variant: ToastVariant = 'info', duration = 4500) {
         const id = seed++
         state.toasts.push({ id, message, variant })
         window.setTimeout(() => dismiss(id), duration)
