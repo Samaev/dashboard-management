@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import UserList from "@/components/UserList.vue";
+import ToastHost from "@/components/ToastHost.vue";
 
 </script>
 
@@ -15,8 +16,7 @@ import UserList from "@/components/UserList.vue";
      <span>Vue 3 • Composition API • TypeScript</span>
     </div>
    </div>
-
+   <ToastHost/>
   </div>
 </template>
 
-<style scoped></style>

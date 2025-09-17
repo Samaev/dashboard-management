@@ -85,7 +85,31 @@ body {
     letter-spacing: .04em;
 }
 
+.badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .02em;
+    color: #fff;
+    text-transform: uppercase;
+}
+.badge--green { background: rgba(40,199,111,0.25); border: 1px solid rgba(100, 186, 137, 0.45); }
+.badge--red   { background: rgba(255,77,79,0.25); border: 1px solid rgba(255,77,79,0.45); }
 
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    background: #101319;
+    cursor: pointer;
+}
 .btn:hover { background: #0f1116; }
 .btn--danger {
     border-color: rgba(255,77,79,0.4);
@@ -97,6 +121,26 @@ body {
     padding: 20px;
     color: var(--muted);
 }
+
+.toast-host {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    display: grid;
+    gap: 12px;
+    z-index: 9999;
+}
+.toast {
+    min-width: 260px;
+    max-width: 420px;
+    background: #0f1116;
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+.toast--success { border-color: rgba(40,199,111,0.45); }
+.toast--error   { border-color: rgba(255,77,79,0.45); }
 
 .footer {
     padding: 12px 20px;

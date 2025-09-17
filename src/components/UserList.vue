@@ -66,8 +66,9 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import StatusBadge from './StatusBadge.vue'
-import { useUsers, type User } from '../composables/useUsers'
+import { useUsers } from '../composables/useUsers'
 import { useToast } from '../composables/useToast'
+import type {User} from "@/types/user.ts";
 import type {StatusFilter} from "@/types/status-filter.ts";
 
 const { users, loading, error, fetchUsers, deleteUser } = useUsers()
@@ -85,9 +86,7 @@ const filteredUsers = computed<User[]>(() => {
 
  const byStatus = (u: User) =>
    status.value === 'all' ? true : u.status === status.value
-
- // Keep stable order; filter in one pass
- return users.value.filter(u => bySearch(u) && byStatus(u))
+   return users.value.filter(u => bySearch(u) && byStatus(u))
 })
 
 async function onDelete(id: number, name: string) {
